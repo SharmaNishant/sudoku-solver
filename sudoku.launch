@@ -1,0 +1,12 @@
+<!-- input filename (can be relative to the executable) -->
+input.blank.txt
+<!-- Type of Simulation {HILL_CLIMBING or SIMULATED_ANEALING or HILL_CLIMBING_PROBABILITY} -->
+SIMULATED_ANEALING
+<!-- seed value (int : -1 for random) -->
+-1
+<!-- Temprature / Probability [0,1) | Eg: 0.05 is 5% -->
+0.05
+<!-- Temperature Drop Constant  | for eg: temp = temp * tempDropConstant -->
+0.08
+<!-- Temperature Drop After Iterations -->
+5000
