@@ -17,7 +17,7 @@
 
 enum SimulationType {
 	HILL_CLIMBING,
-	SIMULATED_ANEALING,
+	SIMULATED_ANNEALING,
 	HILL_CLIMBING_PROBABILITY
 };
 
@@ -39,11 +39,11 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
 void colorPrint(int n);
 
 void HillClimbing(Sudoku &sudoku, unsigned int seed = time(NULL));
-void SimulatedAnealing(Sudoku &sudoku, unsigned int seed = time(NULL));
+void SimulatedAnnealing(Sudoku &sudoku, unsigned int seed = time(NULL));
 void HillClimbingProbability(Sudoku &sudoku, unsigned int seed = time(NULL));
 
 
-void ReadFromFile(char* filename, string &fileName, SimulationType &simType, unsigned int &seed);
+void ReadFromFile(string filename, string &fileName, SimulationType &simType, unsigned int &seed);
 void ReadFromArgs(int argCount, char** argValues, string &fileName, SimulationType &simType, unsigned int &seed);
 
 #endif //AISOFT_HW1_GLOBALFUNCTIONS_H

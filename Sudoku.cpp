@@ -21,7 +21,7 @@ Sudoku::Sudoku() {
 	this->seed = time(NULL);
 }
 
-Sudoku::Sudoku(char *filename, unsigned int seed) {
+Sudoku::Sudoku(string filename, unsigned int seed) {
 	this->initializeMembers();
 	this->readSudoku_File(filename);
 	this->seed = seed;
@@ -219,18 +219,44 @@ void Sudoku::SureSwap(Location first, Location second)
  */
 int Sudoku::TestSwap(Location first, Location second) {
 	int firstValue = this->sudoku[first.row][first.col].value;
+	if(this->sudoku[first.row][first.col].isFixed)
+	{
+		assert(!"Trying to swap a fixed location");
+	}
 	int secondValue = this->sudoku[second.row][second.col].value;
+	if(this->sudoku[second.row][second.col].isFixed)
+	{
+		assert(!"Trying to swap a fixed location");
+	}
+
 	int newFitness = 0;
 	//test swap columns and get updated fitness delta values
-	newFitness += getColumnFitness(first.col, firstValue, secondValue);
-	newFitness += getColumnFitness(second.col, secondValue, firstValue);
+	if(first.col != second.col)
+	{
+		newFitness += getColumnFitness(first.col, firstValue, secondValue);
+		//cout<< "newFitness col 1 " << newFitness << endl;
+
+		newFitness += getColumnFitness(second.col, secondValue, firstValue);
+		//cout<< "newFitness col 2 " << newFitness << endl;
+
+	}
+
 	//test swap quadrants and get updated fitness delta values
-	int quadNum = getQuadrantNumber(first.row,first.col);
-	newFitness += getQuadrantFitness(quadNum, firstValue, secondValue);
-	quadNum = getQuadrantNumber(second.row,second.col);
-	newFitness += getQuadrantFitness(quadNum, secondValue, firstValue);
+	int firstQuad = getQuadrantNumber(first.row,first.col);
+	int secondQuad = getQuadrantNumber(second.row,second.col);
+
+	if(firstQuad != secondQuad)
+	{
+		newFitness += getQuadrantFitness(firstQuad, firstValue, secondValue);
+		//cout<< "newFitness quad "<< firstQuad << " " << newFitness << endl;
+		newFitness += getQuadrantFitness(secondQuad, secondValue, firstValue);
+		//cout<< "newFitness quad "<< secondQuad << " " << newFitness << endl;
+	}
+
 	//final new fitness calculation and check
 	newFitness += fitness;
+	//cout<< newFitness << " <= " << fitness << endl;
+
 	return newFitness;
 }
 
@@ -357,7 +383,7 @@ void Sudoku::initializeMembers() {
 	this->fitness = INT_MAX;
 }
 
-bool Sudoku::readSudoku_File(char *filename) {
+bool Sudoku::readSudoku_File(string filename) {
 	//we will keep updating this cell
 	Cell currentCell;
 	string currentRow;

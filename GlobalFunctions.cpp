@@ -10,7 +10,8 @@
 #include "fstream"
 #include "sstream"
 
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems)
+{
 	std::stringstream ss(s);
 	std::string item;
 	while (std::getline(ss, item, delim)) {
@@ -19,70 +20,19 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
 	return elems;
 }
 
-/*
- * Split Function
+/**
+ * This Function takes a Standard string and a delimiter to break the string into substrings
  */
-std::vector<std::string> split(const std::string &s, char delim) {
+std::vector<std::string> split(const std::string &s, char delim)
+{
 	std::vector<std::string> elems;
 	split(s, delim, elems);
 	return elems;
 }
 
-
-
-void HillClimbing(Sudoku &sudoku, unsigned int seed)
-{
-	//seeding with a different value
-	srand(seed);
-	//to choose a random row and two columns
-	int row;
-	int colOne, colTwo;
-	Location first, second;
-	while (sudoku.GetFitness() > 0 && iterationCount < maxIterations)
-	{
-		row = rand() % 9;
-		colOne = rand() % 9;
-		colTwo = rand() % 9;
-		first.row = second.row = row;
-		first.col = colOne;
-		second.col = colTwo;
-		//check if the selected cells are not fixed or if they are the same values
-		if(sudoku.isFixed(first) || sudoku.isFixed(second) || colOne == colTwo)
-		{
-			continue; // if any of the location is fixed then move on
-		}
-		//cout<< "Row: " << row <<" - Col 1: "<< colOne << " - Col2: " << colTwo << endl;
-//		cout<< iterationCount << endl;
-//		cout<< sudoku.GetFitness() << endl<<endl;
-		sudoku.Swap(first,second);
-//		sudoku.PrintSudoku(first,second);
-		iterationCount++;
-		if((iterationCount % 1000000) ==0)
-		{
-			cout << "\033[A\033[2K";
-			cout << iterationCount / 1000000 << " Million iterations passed. Current fitness: " << sudoku.GetFitness() << endl;
-//			sudoku.PrintSudoku(first,second);
-//			cout << "\n\033[2J\033[1;1H";
-		}
-//		if(iterationCount > 2000)
-//		{
-//			//usleep(500000);
-//			getchar();
-//		}
-		//cout << "\n\033[2J\033[1;1H";
-	}
-	if(iterationCount >= maxIterations)
-	{
-		cout << "\033[A\033[2K";
-		cout << "\033[1;31mMaxed Out Iterations!!!\033[0m" << endl << endl;
-	}
-	else
-	{
-		cout << "\033[1;32mSolved!!!\033[0m" << endl << endl;
-	}
-	//cout<< sudoku.GetFitness() << " - "<< iterationCount << endl;
-}
-
+/**
+ * This function takes an int values [1-9] and prints it in color on terminal. Colors are pre-mapped to int values
+ * */
 void colorPrint(int n)
 {
 	switch (n)
@@ -110,62 +60,21 @@ void colorPrint(int n)
 
 }
 
-void SimulatedAnealing(Sudoku &sudoku, unsigned int seed) {
-	//seeding with a different value
-	srand(seed);
-	//to choose a random row and two columns
-	int row;
-	int colOne, colTwo;
-	Location first, second;
-	while (sudoku.GetFitness() > 0 && iterationCount < maxIterations)
-	{
-		row = rand() % 9;
-		colOne = rand() % 9;
-		colTwo = rand() % 9;
-		first.row = second.row = row;
-		first.col = colOne;
-		second.col = colTwo;
-		//check if the selected cells are not fixed or if they are the same values
-		if(sudoku.isFixed(first) || sudoku.isFixed(second) || colOne == colTwo)
-		{
-			continue; // if any of the location is fixed then move on
-		}
+/**
+ * This function will drop the temperature/probability value after some iterations. Input for this function are all global
+ */
+void DropTemperature()
+{
+	assert(temperatureDropIterations > 0 && "Value cannot be zero or less than zero");
+	if(iterationCount % temperatureDropIterations == 0)
+		temperature *= temperatureDropConstant;
+}
 
-		int newFitness = sudoku.TestSwap(first,second);
-		double randVal = rand() % 100;
-		double randValFloat = randVal / 10000000;
-		//cout<< newFitness << " - " <<sudoku.GetFitness()<<endl;
-		if(exp(((float) sudoku.GetFitness() - newFitness ) / temperature) - randValFloat > 0)
-		{
-		//	cout<< "First\n";
-			sudoku.SureSwap(first, second);
-		}
-		else
-		{
-		//	cout<< "second\n";
-			sudoku.Swap(first, second);
-		}
-		iterationCount++;
-		if((iterationCount % 1000000) ==0)
-		{
-
-			cout << "\033[A\033[2K";
-			//cout << exp((newFitness - sudoku.GetFitness())/temperature) << " "<< temperature<< " \n";
-			cout << iterationCount / 1000000 << " Million iterations passed. Current fitness: " << sudoku.GetFitness() << endl;
-		}
-//		sudoku.PrintSudoku();
-//
-//		if(iterationCount > 2)
-//		{
-//			cout << exp((newFitness - sudoku.GetFitness())/temperature) << " "<< temperature<< " " << iterationCount / 1000000 << " Million iterations passed. Current fitness: " << sudoku.GetFitness() << endl;
-//			//usleep(500000);
-//			getchar();
-//		}
-//		cout << "\n\033[2J\033[1;1H";
-		//updating temprature
-		if(iterationCount % 5000 == 0)
-			temperature *= temperatureDropConstant;
-	}
+/**
+ * This function prints the final result on screen
+ */
+void DisplayResult(Sudoku &sudoku)
+{
 	if(iterationCount >= maxIterations)
 	{
 		cout << "\033[A\033[2K";
@@ -176,8 +85,112 @@ void SimulatedAnealing(Sudoku &sudoku, unsigned int seed) {
 		cout << "\033[A\033[2K";
 		cout << "\033[1;32mSolved!!!\033[0m" << endl << endl;
 	}
+	cout<<"Sudoku (Final)"<<endl;
+	sudoku.PrintSudoku();
+	cout<<"Fitness = " << sudoku.GetFitness() << endl << endl;
+	cout<<"Number of iterations: " << iterationCount << endl;
 }
 
+/**
+ * This function generates two random locations for swapping. (One Row and Two column, as we are maintaining rows)
+ */
+void GenerateSwapLocations(int &row, int &colOne, int &colTwo, Location &first, Location &second)
+{
+	row = rand() % 9;
+	colOne = rand() % 9;
+	colTwo = rand() % 9;
+	first.row = second.row = row;
+	first.col = colOne;
+	second.col = colTwo;
+}
+
+/**
+ * Hill Climbing Implementation (no bad move probability, just swap if better fitness is found)
+ */
+void HillClimbing(Sudoku &sudoku, unsigned int seed)
+{
+	//seeding with a different value
+	srand(seed);
+	//to choose a random row and two columns
+	int row;
+	int colOne, colTwo;
+	Location first, second;
+	while (sudoku.GetFitness() > 0 && iterationCount < maxIterations) {
+		//get swap locations
+		GenerateSwapLocations(row, colOne, colTwo, first, second);
+		//check if the selected cells are not fixed or if they are the same values
+		if (sudoku.isFixed(first) || sudoku.isFixed(second) || colOne == colTwo) {
+			continue; // if any of the location is fixed then move on
+		}
+		int newFiteness = sudoku.TestSwap(first,second);
+		//this will test and swap
+		if(newFiteness costOperator sudoku.GetFitness())
+		{
+			sudoku.Swap(first, second);
+		}
+
+		if ((iterationCount % 1000000) == 0) {
+			cout << "\033[A\033[2K";
+			cout << iterationCount / 1000000 << " Million iterations passed. Current fitness: " <<
+			sudoku.GetFitness() << endl;
+		}
+		++iterationCount;
+	}
+	DisplayResult(sudoku);
+}
+
+/**
+ * Simulated Annealing Implementation (we use a probability to make a bad move and the probability goes down with time)
+ */
+void SimulatedAnnealing(Sudoku &sudoku, unsigned int seed)
+{
+	//seeding with a different value
+	srand(seed);
+	//to choose a random row and two columns
+	int row;
+	int colOne, colTwo;
+	Location first, second;
+	while (sudoku.GetFitness() > 0 && iterationCount < maxIterations)
+	{
+		//get locations
+		GenerateSwapLocations(row, colOne, colTwo, first, second);
+		//check if the selected cells are not fixed or if they are the same values
+		if(sudoku.isFixed(first) || sudoku.isFixed(second) || colOne == colTwo)
+		{
+			continue; // if any of the location is fixed then move on
+		}
+		//get new Fitness value
+		int newFitness = sudoku.TestSwap(first,second);
+		double randVal = rand() % 100;
+		double randValFloat = randVal / 10000000;
+
+		if(newFitness costOperator sudoku.GetFitness())
+		{
+			sudoku.Swap(first, second);
+		}
+		else if(exp(((float) sudoku.GetFitness() - newFitness ) / temperature) - randValFloat > 0)
+		{
+			sudoku.SureSwap(first, second);
+		}
+
+		//Display Status after every million iterations
+		if((iterationCount % 1000000) ==0)
+		{
+			cout << "\033[A\033[2K";
+			cout << iterationCount / 1000000 << " Million iterations passed. Current fitness: " << sudoku.GetFitness() << endl;
+		}
+		//cout << "\n\033[2J\033[1;1H"; //clear screen
+		//Drop Temperature
+		DropTemperature();
+		//updating iteration count
+		++iterationCount;
+	}
+	DisplayResult(sudoku);
+}
+
+/**
+ * Hill Climbing Implementation with a fixed probability of making a bad move over time
+ */
 void HillClimbingProbability(Sudoku &sudoku, unsigned int seed)
 {
 	//seeding with a different value
@@ -188,67 +201,44 @@ void HillClimbingProbability(Sudoku &sudoku, unsigned int seed)
 	Location first, second;
 	while (sudoku.GetFitness() > 0 && iterationCount < maxIterations)
 	{
-		row = rand() % 9;
-		colOne = rand() % 9;
-		colTwo = rand() % 9;
-		first.row = second.row = row;
-		first.col = colOne;
-		second.col = colTwo;
+		//get locations
+		GenerateSwapLocations(row, colOne, colTwo, first, second);
 		//check if the selected cells are not fixed or if they are the same values
 		if(sudoku.isFixed(first) || sudoku.isFixed(second) || colOne == colTwo)
 		{
 			continue; // if any of the location is fixed then move on
 		}
-
+		//get new Fitness value
 		int newFitness = sudoku.TestSwap(first,second);
 		double randVal = rand() % 100;
 		double randValFloat = randVal / 10000000;
-		//cout<< newFitness << " - " <<sudoku.GetFitness()<<endl;
-		if(exp(((float) sudoku.GetFitness() - newFitness ) / temperature) - randValFloat > 0)
+
+		if(newFitness costOperator sudoku.GetFitness())
 		{
-			//	cout<< "First\n";
-			sudoku.SureSwap(first, second);
-		}
-		else
-		{
-			//	cout<< "second\n";
 			sudoku.Swap(first, second);
 		}
-		iterationCount++;
+		else if(exp(((float) sudoku.GetFitness() - newFitness ) / temperature) - randValFloat > 0)
+		{
+			sudoku.SureSwap(first, second);
+		}
+
+		//Display Status after every million iterations
 		if((iterationCount % 1000000) ==0)
 		{
-
 			cout << "\033[A\033[2K";
-			//cout << exp((newFitness - sudoku.GetFitness())/temperature) << " "<< temperature<< " \n";
 			cout << iterationCount / 1000000 << " Million iterations passed. Current fitness: " << sudoku.GetFitness() << endl;
 		}
-//		sudoku.PrintSudoku();
-//
-//		if(iterationCount > 2)
-//		{
-//			cout << exp((newFitness - sudoku.GetFitness())/temperature) << " "<< temperature<< " " << iterationCount / 1000000 << " Million iterations passed. Current fitness: " << sudoku.GetFitness() << endl;
-//			//usleep(500000);
-//			getchar();
-//		}
-//		cout << "\n\033[2J\033[1;1H";
-		//updating temprature
-		if(iterationCount % 5000 == 0)
-			temperature *= temperatureDropConstant;
+		//cout << "\n\033[2J\033[1;1H"; //clear screen
+		//updating iteration count
+		++iterationCount;
 	}
-	if(iterationCount >= maxIterations)
-	{
-		cout << "\033[A\033[2K";
-		cout << "\033[1;31mMaxed Out Iterations!!!\033[0m" << endl << endl;
-	}
-	else
-	{
-		cout << "\033[A\033[2K";
-		cout << "\033[1;32mSolved!!!\033[0m" << endl << endl;
-	}
+	DisplayResult(sudoku);
 }
 
-
-void ReadFromFile(char* filename, string &fileName, SimulationType &simType, unsigned int &seed)
+/**
+ * This Function Reads Arguments from a pre defined launch file. This will help in saving recompilation time
+ */
+void ReadFromFile(string filename, string &fileName, SimulationType &simType, unsigned int &seed)
 {
 	string currentLine;
 	ifstream launchFile(filename);
@@ -263,12 +253,12 @@ void ReadFromFile(char* filename, string &fileName, SimulationType &simType, uns
 		getline (launchFile, currentLine);
 		//read type of simulation
 		getline (launchFile, currentLine);
-		if(currentLine.find("HILL_CLIMBING"))
+		if(currentLine.compare("HILL_CLIMBING") == 0)
 			simType = HILL_CLIMBING;
-		else if(currentLine.find("HILL_CLIMBING_PROBABILITY"))
+		else if(currentLine.compare("HILL_CLIMBING_PROBABILITY") == 0)
 			simType = HILL_CLIMBING_PROBABILITY;
 		else
-			simType = SIMULATED_ANEALING; //this is default
+			simType = SIMULATED_ANNEALING; //this is default
 		/**********/
 		//read comment on 5th line
 		getline (launchFile, currentLine);
@@ -307,9 +297,9 @@ void ReadFromFile(char* filename, string &fileName, SimulationType &simType, uns
 	}
 }
 
-
-
-
+/**
+ * This Function reads arguments from the command line
+ */
 void ReadFromArgs(int argCount, char** argValues, string &fileName, SimulationType &simType, unsigned int &seed)
 {
 	//first argument is always checked
@@ -323,12 +313,12 @@ void ReadFromArgs(int argCount, char** argValues, string &fileName, SimulationTy
 	if(argCount >= 3)
 	{
 		stringstream ss(argValues[3]);
-		if(ss.str().find("HILL_CLIMBING"))
+		if(ss.str().compare("HILL_CLIMBING") == 0)
 			simType = HILL_CLIMBING;
-		else if(ss.str().find("HILL_CLIMBING_PROBABILITY"))
+		else if(ss.str().compare("HILL_CLIMBING_PROBABILITY") == 0)
 			simType = HILL_CLIMBING_PROBABILITY;
 		else
-			simType = SIMULATED_ANEALING; //this is default
+			simType = SIMULATED_ANNEALING; //this is default
 	}
 	//retrieving simulation type
 	if(argCount >= 4)

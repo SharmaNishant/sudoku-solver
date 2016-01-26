@@ -29,7 +29,7 @@
 
 #include <vector>
 #include <time.h>
-
+#include "string"
 using namespace std;
 
 //zero is ignored in row, column
@@ -55,7 +55,7 @@ class Sudoku {
 
 public:
 	Sudoku();
-	Sudoku(char* filename, unsigned int seed = time(NULL));
+	Sudoku(string filename, unsigned int seed = time(NULL));
 	Sudoku(Cell sudoku[9][9], unsigned int seed = time(NULL));
 	virtual ~Sudoku();
 
@@ -84,7 +84,7 @@ private:
 	//initializes cost/fitness values
 	void initializeMembers();
 	//read sudoku from a file
-	bool readSudoku_File(char* filename);
+	bool readSudoku_File(string filename);
 	//returns fitness for a single column i
 	int getColumnFitness(int col);
 	//returns fitness for a single quadrant i
