@@ -1,2 +1,2 @@
 # Sudoku_Solver
-Hill Climbing, Simulated Annealing based Sudoku solver.  
+Hill Climbing, Simulated Annealing based Sudoku solver. 

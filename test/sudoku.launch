@@ -1,6 +1,6 @@
 <!-- input filename (can be relative to the executable) -->
 input.blank.txt
-<!-- Type of Simulation {HILL_CLIMBING or SIMULATED_ANNEALING or HILL_CLIMBING_PROBABILITY} -->
+<!-- Type of Simulation {HILL_CLIMBING / 0 or SIMULATED_ANNEALING / 2 or HILL_CLIMBING_PROBABILITY / 1} -->
 HILL_CLIMBING
 <!-- seed value (int : -1 for random) -->
 -1

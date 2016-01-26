@@ -253,9 +253,9 @@ void ReadFromFile(string filename, string &fileName, SimulationType &simType, un
 		getline (launchFile, currentLine);
 		//read type of simulation
 		getline (launchFile, currentLine);
-		if(currentLine.compare("HILL_CLIMBING") == 0)
+		if(currentLine.compare("HILL_CLIMBING") == 0 || currentLine[0] == '0')
 			simType = HILL_CLIMBING;
-		else if(currentLine.compare("HILL_CLIMBING_PROBABILITY") == 0)
+		else if(currentLine.compare("HILL_CLIMBING_PROBABILITY") == 0 || currentLine[0] == '1')
 			simType = HILL_CLIMBING_PROBABILITY;
 		else
 			simType = SIMULATED_ANNEALING; //this is default
@@ -304,24 +304,24 @@ void ReadFromArgs(int argCount, char** argValues, string &fileName, SimulationTy
 {
 	//first argument is always checked
 	//retrieving filename
-	if(argCount >= 2)
+	if(argCount > 2)
 	{
 		stringstream ss(argValues[2]);
 		fileName = ss.str();
 	}
 	//retrieving simulation type
-	if(argCount >= 3)
+	if(argCount > 3)
 	{
 		stringstream ss(argValues[3]);
-		if(ss.str().compare("HILL_CLIMBING") == 0)
+		if(ss.str().compare("HILL_CLIMBING") == 0 || ss.str()[0] == '0')
 			simType = HILL_CLIMBING;
-		else if(ss.str().compare("HILL_CLIMBING_PROBABILITY") == 0)
+		else if(ss.str().compare("HILL_CLIMBING_PROBABILITY") == 0 || ss.str()[0] == '1')
 			simType = HILL_CLIMBING_PROBABILITY;
 		else
 			simType = SIMULATED_ANNEALING; //this is default
 	}
 	//retrieving simulation type
-	if(argCount >= 4)
+	if(argCount > 4)
 	{
 		int seeder = atoi(argValues[4]);
 		if(seeder < 0)
@@ -330,19 +330,19 @@ void ReadFromArgs(int argCount, char** argValues, string &fileName, SimulationTy
 			seed = seeder;
 	}
 	//retrieving temperature
-	if(argCount >= 5)
+	if(argCount > 5)
 	{
 		temperature = atof(argValues[5]);
 		assert(temperature >= 0 && temperature <=1 && "Temperature/Probability cannot be less than 0 or more than 1");
 	}
 	//retrieving
-	if(argCount >= 6)
+	if(argCount > 6)
 	{
 		temperatureDropConstant = atof(argValues[6]);
 		assert(temperatureDropConstant < 1 && temperatureDropConstant >=0 && "Temperature drop constant range should be [0,1)");
 	}
 	//retrieving
-	if(argCount >= 7)
+	if(argCount > 7)
 	{
 		temperatureDropIterations = atoi(argValues[7]);
 		assert(temperatureDropIterations > 0 && "Temperature cannot be dropped in less than 1 iteration");
