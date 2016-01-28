@@ -217,7 +217,7 @@ void HillClimbingProbability(Sudoku &sudoku, unsigned int seed)
 		{
 			sudoku.Swap(first, second);
 		}
-		else if(exp(((float) sudoku.GetFitness() - newFitness ) / temperature) - randValFloat > 0)
+		else if(temperature - randValFloat > 0)
 		{
 			sudoku.SureSwap(first, second);
 		}
