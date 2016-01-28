@@ -9,6 +9,7 @@ OBJ = main.o Sudoku.o GlobalFunctions.o
 
 Sudoku_Solver: $(OBJ)
 	$(CXX) -o $@ $^ $(CXXFLAGS)
+	rm -f *.o *~ core
 
 .PHONY: clean
 
