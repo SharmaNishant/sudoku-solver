@@ -16,11 +16,13 @@
 #include <assert.h>
 #include <iostream>
 
+/** Generates a blank sudoku */
 Sudoku::Sudoku() {
 	this->initializeMembers();
 	this->seed = time(NULL);
 }
 
+/** Generates a sudoku from the file and marks the non-zero as fixed */
 Sudoku::Sudoku(string filename, unsigned int seed) {
 	this->initializeMembers();
 	this->readSudoku_File(filename);
@@ -63,6 +65,7 @@ void Sudoku::PrintSudoku() {
 	cout << "╚═════════╩═════════╩═════════╝"<<endl;
 }
 
+/** Print Sudoku with the swap location as colored */
 void Sudoku::PrintSudoku(Location first, Location second) {
 	cout << "╔═════════╦═════════╦═════════╗"<<endl;
 	for (int i = 0; i < 9; ++i) {
@@ -90,6 +93,7 @@ int Sudoku::GetFitness() {
 	return this->fitness;
 }
 
+/** Make a swap after making sure the new fitnes is '<' or '<=' based on the settings */
 void Sudoku::Swap(Location first, Location second) {
 	int firstValue = this->sudoku[first.row][first.col].value;
 	if(this->sudoku[first.row][first.col].isFixed)
@@ -155,7 +159,7 @@ void Sudoku::Swap(Location first, Location second) {
 	}
 }
 
-
+/** Just make a swap */
 void Sudoku::SureSwap(Location first, Location second)
 {
 	int firstValue = this->sudoku[first.row][first.col].value;
@@ -215,7 +219,7 @@ void Sudoku::SureSwap(Location first, Location second)
 
 
 /**
- * Returns true if new fitness is less than the current fitness
+ * Returns new fitness if hypothetically a swap is made
  */
 int Sudoku::TestSwap(Location first, Location second) {
 	int firstValue = this->sudoku[first.row][first.col].value;
@@ -268,6 +272,7 @@ int Sudoku::getValue(Location loc) {
 	return this->sudoku[loc.row][loc.col].value;
 }
 
+/* Fills sudoku with random values while making sure all the rows get unique values*/
 bool Sudoku::fillSudoku() {
 	//as safety calculate fitness first
 	srand(this->seed);
@@ -304,6 +309,7 @@ bool Sudoku::fillSudoku() {
 	return false;
 }
 
+/** Return the count of the number of missing elements */
 int Sudoku::getColumnFitness(int col) {
 	int fitness=0;
 	for (int val = 1; val < 10; ++val)
@@ -317,6 +323,7 @@ int Sudoku::getColumnFitness(int col) {
 	return 9-fitness;
 }
 
+/** Return the count of the number of missing elements */
 int Sudoku::getQuadrantFitness(int quad) {
 	int fitness=0;
 	for (int val = 1; val < 10; ++val)
@@ -330,6 +337,7 @@ int Sudoku::getQuadrantFitness(int quad) {
 	return 9-fitness;
 }
 
+/** Return the sum of fitness of the all quadrants */
 int Sudoku::getQuadrantFitness() {
 	int fitness = 0;
 	for (int i = 0; i < 9; ++i) {
@@ -339,6 +347,7 @@ int Sudoku::getQuadrantFitness() {
 	return fitness;
 }
 
+/** Return the sum of fitness of the all columns */
 int Sudoku::getColumnFitness() {
 	int fitness = 0;
 	for (int j = 0; j < 9; ++j) {
@@ -437,6 +446,7 @@ void Sudoku::calculateFitness() {
 	this->fitness = this->getQuadrantFitness() + this->getColumnFitness();
 }
 
+/** Sets the values of the fitness array with the number of times a value appears in the sub-square for each sub-square*/
 void Sudoku::generateQuadrantFitness() {
 	//set everything false before regenerating
 	for (int i = 0; i < 9; ++i) {
