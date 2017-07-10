@@ -42,7 +42,7 @@ $(document).ready(function () {
 function generateSudokuGrid(data) {
     return $('<table>').append(multiPush(9, function () {
         return $('<tr>').append(multiPush(9, function () {
-            return $('<td class="cell"><input type="text" maxlength="1"></div>');
+            return $('<td class="cell"><input type="number" maxlength="1"></div>');
         }));
     })).addClass('sudoku');
 }
