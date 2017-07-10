@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i,600,600i" rel="stylesheet">
+		<title>Sudoku Solver</title>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row title-row">
+				<div class="container">			
+					<div class="row baseline-align">
+						<div class="col-md-6 text-uppercase text-left">
+							<h1>Sudoku Solver</h1>
+						</div>
+						<div class="col-md-6 text-right title-text">
+							<h4>By <a href="http://nishantsharma.me" class="title-text">Nishant Sharma</a></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Upload Image</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p>Have a hard Sudoku puzzle? Just take a picture of the puzzle, upload it, and we will solve it for you.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="fileinput fileinput-new" data-provides="fileinput">
+    					<div class="input-group">
+						    <label class="input-group-btn">
+						        <span class="btn btn-primary">
+						            Browse&hellip; <input type="file" style="display: none;" multiple>
+						        </span>
+						    </label>
+						    <input type="text" class="form-control" readonly>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<button type="button" class="btn btn-primary">Solve it!</button>
+				</div>			
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Note:</h3>
+				</div>
+				<div class="col-md-12">
+					<ol>
+						<li>The image should clearly cover the boundaries of the Sudoku puzzle. Have a look at this <a data-toggle="modal" data-target="#myModal">sample</a> file. </li>
+						<li>At the moment, we can only recognize computer based fonts.</li>
+						<li>No files bigger than 5 MB's.</li>
+					</ol> 
+				</div>
+			</div>			
+			<div class="row">
+				<div class="col-md-12">
+					<hr>
+				</div>
+			</div>
+			
+			
+			
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Input Text</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<p>Don't have a camera nearby or have writen on the puzzle? Don't worry! Just enter the known digits and we will solve it for you.</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div id="sudokusolver">
+					</div>
+				</div>
+				<div class="col-md-8">
+					<button type="button" class="btn btn-primary">Solve it!</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Note:</h3>
+				</div>
+				<div class="col-md-12">
+					<ol>
+						<li>For unknown values, leave the field empty.</li>
+					</ol> 
+				</div>
+			</div>				
+
+			<div class="row">
+				<div class="col-md-12">
+					<hr>
+				</div>
+			</div>
+		</div>
+				
+
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sample input file.</h4>
+					</div>
+					<div class="modal-body">
+						<p>Notice how the image fully covers the sudoku puzzle.</p>
+						<img class="img-responsive" src="img/sample.jpg" alt="A sample input file for the sudoku solver."></img>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+					  
+			</div>
+		</div>
+
+		
+		<script type="text/javascript" src="js/custom.js"></script>
+	</body>
+</html>

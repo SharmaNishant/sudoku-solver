@@ -1,0 +1,103 @@
+.baseline-align {
+	display: flex;
+	align-items: baseline;
+	flex-direction: row;
+}
+
+.title-row {
+	background-color: #be1e35;
+	color: #ffffff;
+	border-bottom: 4px solid #323232;
+    min-height: 56px;
+    position: relative;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+
+.title-text {
+	color: #ffffff;
+}
+
+.title-text a:hover {
+	color: #ffffff;
+    text-decoration: underline;
+}
+
+h1 {
+	font-weight: 600;	
+}
+
+h2 {
+	font-weight: 600;	
+}
+
+h3 {
+	font-weight: 600;	
+}
+
+h4 {
+	font-weight: 600;	
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border: 0;
+    border-top: 3px solid #323232;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, 'Titillium Web', sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+table.sudoku {
+    border-collapse: collapse;
+	font-family: "Helvetica Neue", Helvetica, 'Titillium Web', sans-serif;
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.sudoku tr {
+    height: 30px;
+    width: 30px;
+}
+
+.sudoku tr:nth-of-type(3n) {
+    border-bottom: solid medium;
+}
+.sudoku td:nth-of-type(3n) {
+    border-right: solid medium;
+}
+.sudoku td {
+    border: solid thin;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    padding: 0;
+}
+
+/* Presentation Formatting [Ignore] */
+table[class^="sudoku"] {
+  margin: auto auto;
+}
+.wrapper {
+  width: 100%;
+}
+.col {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.cell input {
+    display: inline-block;
+    float: left;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    font-size: 20px;
+}
