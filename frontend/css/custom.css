@@ -13,6 +13,24 @@
     font-family: 'Titillium Web', sans-serif;
 }
 
+.footer-row {
+	background-color: #dddddd;
+	font-size: 20px;
+    color: #000000;
+	border-top: 2px solid #323232;
+    min-height: 80px;
+    position: relative;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.footer-text {
+	color: #be1e35;
+}
+
+.footer-text a:hover {
+	color: #000000;
+    text-decoration: underline;
+}
 
 .title-text {
 	color: #ffffff;
@@ -22,6 +40,11 @@
 	color: #ffffff;
     text-decoration: underline;
 }
+
+.icon > svg { display: inline-block; width: 16px; height: 16px; vertical-align: middle; }
+.icon > svg path { fill: #444444; }
+.post-list { margin-top: 5px; list-style: none; }
+
 
 h1 {
 	font-weight: 600;	
@@ -43,7 +66,7 @@ hr {
     margin-top: 0px;
     margin-bottom: 0px;
     border: 0;
-    border-top: 3px solid #323232;
+    border-top: 2px solid #323232;
 }
 
 body {
