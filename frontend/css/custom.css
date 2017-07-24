@@ -47,19 +47,20 @@
 
 
 h1 {
-	font-weight: 600;	
+	font-weight: 600;
+  	font-height: 50px;
 }
 
 h2 {
-	font-weight: 600;	
+	font-weight: 600;
 }
 
 h3 {
-	font-weight: 600;	
+	font-weight: 600;
 }
 
 h4 {
-	font-weight: 600;	
+	font-weight: 600;
 }
 
 hr {
@@ -135,3 +136,10 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+.vertically-center {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 5px;
+
+}
