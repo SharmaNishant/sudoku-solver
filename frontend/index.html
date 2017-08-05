@@ -41,15 +41,16 @@
     					<div class="input-group">
 						    <label class="input-group-btn">
 						        <span class="btn btn-primary">
-						            Browse&hellip; <input type="file" style="display: none;" multiple>
+						            Browse&hellip; <input type="file" accept="image/*" style="display: none;" id="file_select">
 						        </span>
 						    </label>
-						    <input type="text" class="form-control" readonly>
+						    <input type="text" class="form-control"  id="file_select_label" readonly>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-8">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#solveItModal">Solve it!</button>
+					<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#solveItModal">Solve it!</button>-->
+					<button type="button" class="btn btn-primary" id="file_solve_button" onclick='solveSudokuFile();'>Solve it!</button>
 				</div>
 			</div>
 			<div class="row">
@@ -99,6 +100,7 @@
 				<div class="col-md-12">
 					<ol>
 						<li>For unknown values, leave the field empty.</li>
+						<li>If you leave all fields empty. We will generate a random Sudoku puzzle for you (Solved of course!).</li>
 					</ol>
 				</div>
 			</div>
@@ -162,7 +164,7 @@
 					</div>
 					<div class="modal-body">
 						<p>Notice how the image fully covers the sudoku puzzle.</p>
-						<img class="img-responsive" src="img/sample.jpg" alt="A sample input file for the sudoku solver."></img>
+						<img class="img-responsive" src="img/sample.jpg" alt="A sample input file for the sudoku solver."/>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
