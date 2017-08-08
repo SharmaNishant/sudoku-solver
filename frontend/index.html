@@ -1,200 +1,316 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/custom.css">
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i,600,600i" rel="stylesheet">
-		<title>Sudoku Solver</title>
-	</head>
-	<body>
-		<div class="container-fluid">
-			<div class="row title-row">
-				<div class="container">
-					<div class="row vertically-center">
-						<div class="col-md-6 ">
-              						<img src="img/icon.svg" class="img-responsive" alt="Website logo">
-						</div>
-						<div class="col-md-6 text-uppercase text-center">
-							<h1>Sudoku Solver</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Upload Image</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<p>Have a hard Sudoku puzzle? Just take a picture of the puzzle, upload it, and we will solve it for you.</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="fileinput fileinput-new" data-provides="fileinput">
-    					<div class="input-group">
-						    <label class="input-group-btn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,400i,600,600i" rel="stylesheet">
+    <title>Sudoku Solver</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row title-row">
+        <div class="container">
+            <div class="row vertically-center">
+                <div class="col-md-6 ">
+                    <img src="img/icon.svg" class="img-responsive" alt="Website logo">
+                </div>
+                <div class="col-md-6 text-uppercase text-center">
+                    <h1>Sudoku Solver</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Upload Image</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Have a hard Sudoku puzzle? Just take a picture of the puzzle, upload it, and we will solve it for
+                you.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="input-group">
+                    <label class="input-group-btn">
 						        <span class="btn btn-primary">
-						            Browse&hellip; <input type="file" accept="image/*" style="display: none;" id="file_select">
+						            Browse&hellip; <input type="file" accept="image/*" style="display: none;"
+                                                          id="file_select">
 						        </span>
-						    </label>
-						    <input type="text" class="form-control"  id="file_select_label" readonly>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#solveItModal">Solve it!</button>-->
-					<button type="button" class="btn btn-primary" id="file_solve_button" onclick='solveSudokuFile();'>Solve it!</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Note:</h3>
-				</div>
-				<div class="col-md-12">
-					<ol>
-						<li>The image should clearly cover the boundaries of the Sudoku puzzle. Have a look at this <a data-toggle="modal" data-target="#myModal">sample</a> file. </li>
-						<li>At the moment, we can only recognize computer based fonts.</li>
-						<li>No files bigger than 5 MB's.</li>
-					</ol>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<hr>
-				</div>
-			</div>
+                    </label>
+                    <input type="text" class="form-control" id="file_select_label" readonly>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#solveItModal">Solve it!</button>-->
+            <button type="button" class="btn btn-primary" id="file_solve_button" onclick='solveSudokuFile();'>Solve
+                it!
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Note:</h3>
+        </div>
+        <div class="col-md-12">
+            <ol>
+                <li>The image should clearly cover the boundaries of the Sudoku puzzle. Have a look at this <a
+                        data-toggle="modal" data-target="#myModal">sample</a> file.
+                </li>
+                <li>At the moment, we can only recognize computer based fonts.</li>
+                <li>No files bigger than 5 MB's.</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
 
 
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Input Text</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Don't have a camera nearby or have writen on the puzzle? Don't worry! Just enter the known digits and we
+                will solve it for you.</p>
+        </div>
+    </div>
 
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Input Text</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<p>Don't have a camera nearby or have writen on the puzzle? Don't worry! Just enter the known digits and we will solve it for you.</p>
-				</div>
-			</div>
+    <div class="row">
+        <div class="col-md-4">
+            <div id="sudokusolver">
+                <div class="wrapper">
+                    <div class="col">
+                        <table class="sudoku">
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input00"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input01"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input02"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input03"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input04"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input05"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input06"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input07"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input08"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input10"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input11"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input12"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input13"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input14"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input15"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input16"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input17"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input18"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input20"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input21"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input22"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input23"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input24"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input25"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input26"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input27"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input28"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input30"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input31"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input32"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input33"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input34"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input35"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input36"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input37"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input38"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input40"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input41"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input42"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input43"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input44"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input45"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input46"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input47"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input48"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input50"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input51"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input52"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input53"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input54"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input55"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input56"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input57"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input58"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input60"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input61"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input62"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input63"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input64"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input65"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input66"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input67"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input68"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input70"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input71"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input72"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input73"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input74"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input75"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input76"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input77"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input78"></td>
+                            </tr>
+                            <tr>
+                                <td class="cell"><input type="number" min="0" max="9" id="input80"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input81"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input82"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input83"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input84"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input85"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input86"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input87"></td>
+                                <td class="cell"><input type="number" min="0" max="9" id="input88"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#solveItModal">Solve it!
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Note:</h3>
+        </div>
+        <div class="col-md-12">
+            <ol>
+                <li>For unknown values, leave the field empty.</li>
+                <li>If you leave all fields empty. We will generate a random Sudoku puzzle for you (Solved of
+                    course!).
+                </li>
+            </ol>
+        </div>
+    </div>
 
-			<div class="row">
-				<div class="col-md-4">
-					<div id="sudokusolver">
-					</div>
-				</div>
-				<div class="col-md-8">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#solveItModal">Solve it!</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Note:</h3>
-				</div>
-				<div class="col-md-12">
-					<ol>
-						<li>For unknown values, leave the field empty.</li>
-						<li>If you leave all fields empty. We will generate a random Sudoku puzzle for you (Solved of course!).</li>
-					</ol>
-				</div>
-			</div>
+</div>
 
-		</div>
-
-		<div class="container-fluid">
-			<div class="row footer-row navbar navbar-fixed-bottom">
-				<div class="container">
-					<div class="row text-center">
-						<div class="col-md-6 text-center">
-							<h2>Made by: <a href="http://nishantsharma.me" class="footer-text">Nishant Sharma</a></h2>
-						</div>
-						<div class="col-md-1">
-						</div>
-						<div class="col-md-5">
-							<ul class="text-justify post-list">
-          						<li>
-									<a href="https://github.com/SharmaNishant">
+<div class="container-fluid">
+    <div class="row footer-row navbar navbar-fixed-bottom">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-6 text-center">
+                    <h2>Made by: <a href="http://nishantsharma.me" class="footer-text">Nishant Sharma</a></h2>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <ul class="text-justify post-list">
+                        <li>
+                            <a href="https://github.com/SharmaNishant">
 									  <span class="icon  icon--github">
 										<svg viewBox="0 0 16 16">
-										  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+										  <path fill="#828282"
+                                                d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
 										</svg>
 									  </span>
 
-									  <span class="username">SharmaNishant</span>
-									</a>
-								  </li>
+                                <span class="username">SharmaNishant</span>
+                            </a>
+                        </li>
 
 
-
-								  <li>
-									<a href="https://www.linkedin.com/in/nishant-sharma">
+                        <li>
+                            <a href="https://www.linkedin.com/in/nishant-sharma">
 									  <span class="icon icon--github">
-										<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg>
+										<svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                             xmlns="http://www.w3.org/2000/svg"><path
+                                                d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg>
 									  </span>
 
-									  <span class="username">Nishant Sharma</span>
-									</a>
-								  </li>
+                                <span class="username">Nishant Sharma</span>
+                            </a>
+                        </li>
 
-        					</ul>
+                    </ul>
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sample input file.</h4>
+            </div>
+            <div class="modal-body">
+                <p>Notice how the image fully covers the sudoku puzzle.</p>
+                <img class="img-responsive" src="img/sample.jpg" alt="A sample input file for the sudoku solver."/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
 
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Sample input file.</h4>
-					</div>
-					<div class="modal-body">
-						<p>Notice how the image fully covers the sudoku puzzle.</p>
-						<img class="img-responsive" src="img/sample.jpg" alt="A sample input file for the sudoku solver."/>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
+    </div>
+</div>
 
-			</div>
-		</div>
+<!-- Modal -->
+<div class="modal fade" id="solveItModal" role="dialog">
+    <div class="modal-dialog">
 
-		<!-- Modal -->
-		<div class="modal fade" id="solveItModal" role="dialog">
-			<div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Backend underconstruction.</h4>
+            </div>
+            <div class="modal-body">
+                <p>We are currently developing and deploying the backend for this web app. Please revist after a couple
+                    of days!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
 
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Backend underconstruction.</h4>
-					</div>
-					<div class="modal-body">
-						<p>We are currently developing and deploying the backend for this web app. Please revist after a couple of days!</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
+    </div>
+</div>
 
-			</div>
-		</div>
-
-		<script type="text/javascript" src="js/custom.js"></script>
-	</body>
+<script type="text/javascript" src="js/custom.js"></script>
+</body>
 </html>
