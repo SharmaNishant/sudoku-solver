@@ -2,6 +2,6 @@
 
 ## Todo:
 
-- [ ] Update sudoku solver algorithms 
+- [ ] Update sudoku solver algorithms
 - [ ] Update vision detection
 - [ ] Write python server
